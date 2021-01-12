@@ -77,7 +77,7 @@ function candidateRows(raceNum, totalVotes) {
 // <td>votes (percent)</td>
 // </tr>
     rowHTML += "<tr>" + "<td>" + candidateName + "(" + candidateParty + ")" + "</td>" + "<td>"
-      + candidateVotes.toLocaleString() + "(" + candidatePercent.toFixed(1) + ")" + "</td>";
+      + candidateVotes.toLocaleString() + "(" + candidatePercent.toFixed(1) + "%" + ")" + "</td>";
 
     for (var k = 0; k < candidatePercent.toFixed(0); k++) {
       rowHTML += createBar(candidateParty)
@@ -98,8 +98,10 @@ function candidateRows(raceNum, totalVotes) {
   switch (partyType) {
     case "D":
       barHTML = "<td class='dem'></td>";
+      break;
     case "R":
       barHTML = "<td class='rep'></td>";
+      break;
     case "I":
       barHTML = "<td class='ind'></td>";
 
