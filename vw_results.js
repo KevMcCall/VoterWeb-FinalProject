@@ -30,48 +30,83 @@ var reportHTML = "<h1>" + raceTitle + "</h1>";
 // Create a foor loop that loops through the contents of the race array
 for (var i = 0; i < race.length; i++) {
 
-// Create a variable named totalVotes that will store the total votes cast in each race. Set it's value to 0.
-   var totalVotes = 0;
+  // Create a variable named totalVotes that will store the total votes cast in each race. Set it's value to 0.
+  var totalVotes = 0;
 
-   //Calculate the toal votes cast  in the current race by applying the forEach() method.
-   votes[i].forEach(function (value) {
-      calcSum(value);
-   }
-   );
+  //Calculate the toal votes cast  in the current race by applying the forEach() method.
+  votes[i].forEach(function (value) {
+    calcSum(value);
+  }
+  );
 
-// Add the following HTML text to the value of the reportHTML variable to write the name of the current race in the program loop
-reportHTML += "<table>" + "<caption>" + race[i] + "</caption>" + "<tr><th>" +"Candidate" + "</th></tr>";
-reportHTML += candidateRows(i, totalVotes);
-reportHTML += "<table>"
+  // Add the following HTML text to the value of the reportHTML variable to write the name of the current race in the program loop
+  reportHTML += "<table>" + "<caption>" + race[i] + "</caption>" + "<tr><th>" + "Candidate" + "</th></tr>";
+  reportHTML += candidateRows(i, totalVotes);
+  reportHTML += "<table>"
 
 }
 
 //After the for loop has completed, write the value of the reportHTML variable into the innterHTML.
 
-document.getElementsByTagName()[0].innerHTML = reportHTML;
+document.getElementsByTagName("section")[0].innerHTML = reportHTML;
 
 /* Callback Function to calculate an array sum */
 function calcSum(value) {
-   totalVotes += value;
+  totalVotes += value;
 }
 
 /* Function to calculate a percentage */
 function calcPercent(value, sum) {
-   return (100*value/sum);
+  return (100 * value / sum);
 }
 
 // Create candidateRows function to write individual table rows for each candidate, 
-// showing the candidates name, part affiliation, vote total, and vote percentage.
+// showing the candidates name, party affiliation, vote total, and vote percentage.
 
 function candidateRows(raceNum, totalVotes) {
-   var rowHTML = "";
-   for (var j = 0; j <= 2; j++) {
-       var candidateName =candidate[raceNum][j];
-       var candidateParty =party[raceNum][j];
-       var candidateVotes =votes [raceNum][j];
-       var candidatePercent =calcPercent(candidateVotes , totalVotes);
-       rowHTML +="<tr><td>"+candidateName+"("+candidateParty+")</td><td>"+ candidateVotes + "("+ candidatePercent+")</td></tr>"
+  var rowHTML = "";
+  for (var j = 0; j <= 2; j++) {
+    var candidateName = candidate[raceNum][j];
+    var candidateParty = party[raceNum][j];
+    var candidateVotes = votes[raceNum][j];
+    var candidatePercent = calcPercent(candidateVotes, totalVotes);
+    rowHTML += "<tr>" + "<td>" + candidateName + "(" + candidateParty + ")" + "</td>" + "<td>"
+      + candidateVotes.toLocaleString() + "(" + candidatePercent.toFixed(1) + ")" + "</td>";
 
-   }
+    for (var k = 0; k < candidatePercent.toFixed(0); k++) {
+      rowHTML += createBar(candidateParty)
+    }
+    rowHTML += "</tr>";
 
+  }
+  return rowHTML;
+}
+
+for (var i = 0; i < race.length; i++) {
+  var totalVotes = 0;
+  votes[i].forEach(function (value) {
+    calcSum(value);
+  });
+  reportHTML += "<table>" +
+    "<caption>" + race[i] + "</caption>" +
+    "<tr><th>" + candidateRows(i, totalVotes) + "</th><th>" + totalVotes + "</th></tr>";
+  reportHTML += "</table>";
+}
+
+
+function createBar(partyType) {
+
+  var barHTML = "";
+
+  switch (partyType) {
+    case "D":
+      barHTML = "<td class='dem'></td>";
+    case "R":
+      barHTML = "<td class='rep'></td>";
+    case "I":
+      barHTML = "<td class='ind'></td>";
+
+
+  }
+  return barHTML;
 }
