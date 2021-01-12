@@ -79,20 +79,9 @@ function candidateRows(raceNum, totalVotes) {
     rowHTML += "</tr>";
 
   }
+// Return the value of the rowHTML variable
   return rowHTML;
 }
-
-for (var i = 0; i < race.length; i++) {
-  var totalVotes = 0;
-  votes[i].forEach(function (value) {
-    calcSum(value);
-  });
-  reportHTML += "<table>" +
-    "<caption>" + race[i] + "</caption>" +
-    "<tr><th>" + candidateRows(i, totalVotes) + "</th><th>" + totalVotes + "</th></tr>";
-  reportHTML += "</table>";
-}
-
 
 function createBar(partyType) {
 
