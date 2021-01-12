@@ -70,6 +70,12 @@ function candidateRows(raceNum, totalVotes) {
     var candidateParty = party[raceNum][j];
     var candidateVotes = votes[raceNum][j];
     var candidatePercent = calcPercent(candidateVotes, totalVotes);
+
+// Add the following HTML code to the value of the rowHTML variable 
+// <tr>
+// <td>name (party)</td>
+// <td>votes (percent)</td>
+// </tr>
     rowHTML += "<tr>" + "<td>" + candidateName + "(" + candidateParty + ")" + "</td>" + "<td>"
       + candidateVotes.toLocaleString() + "(" + candidatePercent.toFixed(1) + ")" + "</td>";
 
@@ -83,10 +89,12 @@ function candidateRows(raceNum, totalVotes) {
   return rowHTML;
 }
 
-function createBar(partyType) {
+//Create a function named createBar() with one parameter named partyType
+    function createBar(partyType) {
 
   var barHTML = "";
 
+// Create a switch/case statement that tests the value of the partyType parameter.
   switch (partyType) {
     case "D":
       barHTML = "<td class='dem'></td>";
