@@ -40,7 +40,7 @@ for (var i = 0; i < race.length; i++) {
   );
 
   // Add the following HTML text to the value of the reportHTML variable to write the name of the current race in the program loop
-  reportHTML += "<table>" + "<caption>" + race[i] + "</caption>" + "<tr><th>" + "Candidate" + "</th></tr>";
+  reportHTML += "<table>" + "<caption>" + race[i] + "</caption>" + "<tr><th>" + "Candidate" + "</th><th>" + "Votes" + "</th></tr>";
   reportHTML += candidateRows(i, totalVotes);
   reportHTML += "<table>"
 
@@ -65,10 +65,10 @@ function calcPercent(value, sum) {
 
 function candidateRows(raceNum, totalVotes) {
   var rowHTML = "";
-  for (var j = 0; j <= 2; j++) {
-    var candidateName = candidate[raceNum][j];
-    var candidateParty = party[raceNum][j];
-    var candidateVotes = votes[raceNum][j];
+  for (var i = 0; i <= 2; i++) {
+    var candidateName = candidate[raceNum][i];
+    var candidateParty = party[raceNum][i];
+    var candidateVotes = votes[raceNum][i];
     var candidatePercent = calcPercent(candidateVotes, totalVotes);
 
 // Add the following HTML code to the value of the rowHTML variable 
